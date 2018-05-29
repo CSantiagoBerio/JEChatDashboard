@@ -77,7 +77,7 @@ function reformatHashtagData(jsonData){
 */
 function drawMessageChart() {
     var jsonData = $.ajax({
-        url: "http://localhost:4545/JEChat/messages/countperday",
+        url: "http://jechat-restapi.herokuapp.com/JEChat/messages/countperday",
         dataType: "json",
         async: false
     }).responseText;
@@ -113,7 +113,7 @@ function drawMessageChart() {
 */
 function drawUsersChart() {
     var jsonData = $.ajax({
-        url: "http://localhost:4545/JEChat/users/activity",
+        url: "http://jechat-restapi.herokuapp.com/JEChat/users/activity",
         dataType: "json",
         async: false
     }).responseText;
@@ -149,7 +149,7 @@ function drawUsersChart() {
 */
 function drawLikeChart(){
   var likeData = $.ajax({
-    url: "http://localhost:4545/JEChat/likes/countperday",
+    url: "http://jechat-restapi.herokuapp.com/JEChat/likes/countperday",
     dataType: "json",
     async: false
   }).responseText;
@@ -183,7 +183,7 @@ function drawLikeChart(){
 
 function drawDislikeChart(){
   var dislikeData = $.ajax({
-    url: "http://localhost:4545/JEChat/dislikes/countperday",
+    url: "http://jechat-restapi.herokuapp.com/JEChat/dislikes/countperday",
     dataType: "json",
     async: false
   }).responseText;
@@ -217,7 +217,7 @@ function drawDislikeChart(){
 
 function drawTrendingHashtagsChart(){
   var hashData = $.ajax({
-    url: "http://localhost:4545/JEChat/hashtags/trend",
+    url: "http://jechat-restapi.herokuapp.com/JEChat/hashtags/trend",
     dataType: "json",
     async: false
   }).responseText;
@@ -253,7 +253,7 @@ function drawTrendingHashtagsChart(){
 
 function drawRepliesPerDay(){
   var hashData = $.ajax({
-    url: "http://localhost:4545/JEChat/replies/countperday",
+    url: "http://jechat-restapi.herokuapp.com/JEChat/replies/countperday",
     dataType: "json",
     async: false
   }).responseText;
@@ -263,10 +263,10 @@ function drawRepliesPerDay(){
   var data = new google.visualization.DataTable();
   data.addColumn('string', 'Date');
   data.addColumn('number', '# of Replies');
-  data.addRows(reformatHashtagData(JSON.parse(hashData)));
+  data.addRows(reformatData(JSON.parse(hashData)));
 
   var options = {
-    title: 'Trending Hashtags',
+    title: 'Replies Per Day',
     chartArea: {width: '50%'},
     hAxis: {
       title: '# of Posts',
