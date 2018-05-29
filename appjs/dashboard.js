@@ -12,6 +12,7 @@ google.charts.setOnLoadCallback(drawUsersChart);
 google.charts.setOnLoadCallback(drawLikeChart);
 google.charts.setOnLoadCallback(drawDislikeChart);
 google.charts.setOnLoadCallback(drawTrendingHashtagsChart);
+google.charts.setOnLoadCallback(drawRepliesPerDay);
 
 
 /*
@@ -245,6 +246,41 @@ function drawTrendingHashtagsChart(){
 }
 
 
+
+/*
+    Replies per Day
+*/
+
+function drawRepliesPerDay(){
+  var hashData = $.ajax({
+    url: "http://localhost:4545/JEChat/replies/countperday",
+    dataType: "json",
+    async: false
+  }).responseText;
+
+  console.log("jsonData: " + JSON.parse(hashData));
+
+  var data = new google.visualization.DataTable();
+  data.addColumn('string', 'Date');
+  data.addColumn('number', '# of Replies');
+  data.addRows(reformatHashtagData(JSON.parse(hashData)));
+
+  var options = {
+    title: 'Trending Hashtags',
+    chartArea: {width: '50%'},
+    hAxis: {
+      title: '# of Posts',
+      minValue: 0
+    },
+    vAxis: {
+      title: 'Date'
+    }
+  };
+
+  var chart = new google.visualization.BarChart(document.getElementById('replies_per_day'));
+  chart.draw(data, options)
+}
+
 /*
     Loading Charts
 */
@@ -254,6 +290,7 @@ google.charts.setOnLoadCallback(drawUsersChart);
 google.charts.setOnLoadCallback(drawLikeChart);
 google.charts.setOnLoadCallback(drawDislikeChart);
 google.charts.setOnLoadCallback(drawTrendingHashtagsChart);
+google.charts.setOnLoadCallback(drawRepliesPerDay);
 
 function count(){
 
